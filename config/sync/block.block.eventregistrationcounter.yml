@@ -1,0 +1,20 @@
+uuid: 7a4f9fa2-f892-43b0-b88d-4ee06c6dd261
+langcode: en
+status: true
+dependencies:
+  module:
+    - ausy_event
+  theme:
+    - bartik
+id: eventregistrationcounter
+theme: bartik
+region: sidebar_first
+weight: -7
+provider: null
+plugin: event_registration_counter
+settings:
+  id: event_registration_counter
+  label: 'Event registration Counter'
+  label_display: visible
+  provider: ausy_event
+visibility: {  }

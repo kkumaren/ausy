@@ -1,0 +1,6 @@
+name: 'Event'
+description: 'Ausy event features'
+type: module
+version: '8.x-1.0'
+package: 'AUSY'
+core_version_requirement: '^8.8 || ^9'

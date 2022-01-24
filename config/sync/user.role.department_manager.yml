@@ -1,0 +1,9 @@
+uuid: 9bb6d6c2-0aef-4d8b-94c7-c69b9495af47
+langcode: en
+status: true
+dependencies: {  }
+id: department_manager
+label: 'Department manager'
+weight: -7
+is_admin: null
+permissions: {  }

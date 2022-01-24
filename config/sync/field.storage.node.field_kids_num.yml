@@ -1,0 +1,20 @@
+uuid: 52071d6a-613d-4cc5-9cf9-8d69b1a2c9e5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_kids_num
+field_name: field_kids_num
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

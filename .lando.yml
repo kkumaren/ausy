@@ -1,0 +1,25 @@
+name: ausy
+recipe: drupal9
+config:
+  php: '7.4'
+  via: apache
+  webroot: web
+  drush: true
+  xdebug: true
+
+services:
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+
+proxy:
+  phpmyadmin:
+    - mysql.ausy.lndo.site
+
+tooling:
+  phpcs:
+    service: appserver
+    description: 'Run phpcs: lando phpcs'
+    cmd:
+      - 'phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md'

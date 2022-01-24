@@ -1,0 +1,15 @@
+ausy_event.registration:
+  path: '/registration/{department}'
+  defaults:
+    _form: 'Drupal\ausy_event\Form\RegistrationForm'
+    _title: 'Event registration form'
+  requirements:
+    _permission: 'access content'
+    _custom_access:  'Drupal\ausy_event\Form\RegistrationForm::access'
+ausy_event.registration.add_department:
+  path: '/admin/config/add-department'
+  defaults:
+    _form: 'Drupal\ausy_event\Form\AddDepartmentForm'
+    _title: 'Add Department'
+  requirements:
+    _permission: 'ausy_event_manage_event_registration'

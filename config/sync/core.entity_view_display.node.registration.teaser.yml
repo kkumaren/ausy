@@ -1,0 +1,30 @@
+uuid: 96de2966-f7ee-4f24-b9a9-44ec5ce53dae
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.registration.field_department
+    - field.field.node.registration.field_email
+    - field.field.node.registration.field_kids_num
+    - field.field.node.registration.field_one_plus
+    - field.field.node.registration.field_vegetarians_num
+    - node.type.registration
+  module:
+    - user
+id: node.registration.teaser
+targetEntityType: node
+bundle: registration
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_department: true
+  field_email: true
+  field_kids_num: true
+  field_one_plus: true
+  field_vegetarians_num: true

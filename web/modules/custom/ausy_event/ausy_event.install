@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function ausy_event_install() {
+  /*$definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $departments = [
+    'finance' => 'Finance',
+    'it' => 'IT',
+    'consulting' => 'Consulting'
+  ];
+  if ($field_department = $definition_update_manager->getFieldStorageDefinition('field_department', 'node')) {
+    $allowed_values = $field_department->getSetting('allowed_values');
+    $field_department->setSetting('allowed_values', array_merge($allowed_values, $departments));
+    $field_department->save();
+  }*/
+
+}
+

@@ -1,4 +1,4 @@
 services:
   ausy_event:
     class: Drupal\ausy_event\Service\AusyEvent
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@config.factory']

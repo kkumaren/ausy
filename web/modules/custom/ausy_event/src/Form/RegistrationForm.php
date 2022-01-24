@@ -2,6 +2,7 @@
 
 namespace Drupal\ausy_event\Form;
 
+use Drupal\ausy_event\service\AusyEvent;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
@@ -40,6 +41,20 @@ class RegistrationForm extends FormBase {
   protected $time;
 
   /**
+   * Ausy Event service.
+   *
+   * @var \Drupal\ausy_event\service\AusyEvent
+   */
+  public $ausyEvent;
+
+  /**
+   * The department.
+   *
+   * @var string
+   */
+  public $department;
+
+  /**
    * Class constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -48,11 +63,14 @@ class RegistrationForm extends FormBase {
    *   The entity field manager.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   A date time instance.
+   * @param \Drupal\ausy_event\Service\AusyEvent $ausyEvent
+   *   Ausy Event service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, TimeInterface $time) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, TimeInterface $time, AusyEvent $ausyEvent) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->time = $time;
+    $this->ausyEvent = $ausyEvent;
   }
 
   /**
@@ -63,6 +81,7 @@ class RegistrationForm extends FormBase {
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
       $container->get('datetime.time'),
+      $container->get('ausy_event'),
     );
   }
 
@@ -77,6 +96,7 @@ class RegistrationForm extends FormBase {
    * Function build form.
    */
   public function buildForm(array $form, FormStateInterface $form_state, $department = NULL) {
+    $this->department = $department;
     $form['name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Name of the employee'),
@@ -113,9 +133,8 @@ class RegistrationForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state, $department = NULL) {
     $values = $form_state->getValues();
-
     $num_people = 1;
     // Assuming one_plus means to add one more people for the
     // employee husband/wife.
@@ -152,6 +171,7 @@ class RegistrationForm extends FormBase {
       'field_one_plus' => $values['one_plus'] ?? '',
       'field_vegetarians_num' => $values['num_vegetarian'] ?? '',
       'field_email' => $values['email'] ?? '',
+      'field_department' => $this->department,
       'status' => NodeInterface::PUBLISHED,
       'promote' => 0,
       'sticky' => 0,
@@ -174,15 +194,9 @@ class RegistrationForm extends FormBase {
    *   The access result.
    */
   public function access(AccountInterface $account, string $department = NULL) {
-    $fields = $this->entityFieldManager->getFieldDefinitions('node', 'registration');
-    if (isset($fields['field_department'])) {
-      $field = $fields['field_department'];
-      /** @var \Drupal\Core\Field\FieldStorageDefinitionInterface $field_definition */
-      $field_definition = $field->getFieldStorageDefinition();
-      $allowed_values = $field_definition->getSetting('allowed_values');
-      if (isset($allowed_values[$department])) {
-        return AccessResult::allowed();
-      }
+    $options = $this->ausyEvent->getDepartments();
+    if (isset($options[$department])) {
+      return AccessResult::allowed();
     }
     return AccessResult::forbidden();
   }

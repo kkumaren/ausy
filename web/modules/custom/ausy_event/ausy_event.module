@@ -1,1 +1,18 @@
 <?php
+
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\commerce_order\Entity\OrderType;
+
+/**
+ * Provide the allowed values for addon_parameter field.
+ *
+ * Callback for options_allowed_values().
+ */
+function ausy_event_department_options_allowed_values(FieldStorageDefinitionInterface $definition, FieldableEntityInterface $entity = NULL, &$cacheable = TRUE) {
+  /** @var \Drupal\ausy_event\Service\AusyEvent $ausyEvent */
+  $ausyEvent = \Drupal::service('ausy_event');
+  $options = $ausyEvent->getDepartments();
+
+  return $options;
+}

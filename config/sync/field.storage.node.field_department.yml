@@ -10,20 +10,8 @@ field_name: field_department
 entity_type: node
 type: list_string
 settings:
-  allowed_values:
-    -
-      value: finance
-      label: Finance
-    -
-      value: fishing
-      label: Fishing
-    -
-      value: it
-      label: IT
-    -
-      value: consulting
-      label: Consulting
-  allowed_values_function: ''
+  allowed_values: { }
+  allowed_values_function: ausy_event_department_options_allowed_values
 module: options
 locked: false
 cardinality: 1

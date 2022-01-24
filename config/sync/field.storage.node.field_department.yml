@@ -10,7 +10,7 @@ field_name: field_department
 entity_type: node
 type: list_string
 settings:
-  allowed_values: { }
+  allowed_values: {  }
   allowed_values_function: ausy_event_department_options_allowed_values
 module: options
 locked: false

@@ -49,7 +49,7 @@ class RegistrationForm extends FormBase {
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   A date time instance.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, TimeInterface $time,) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, TimeInterface $time) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->time = $time;
